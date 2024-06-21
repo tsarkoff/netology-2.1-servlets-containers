@@ -3,9 +3,10 @@ package ru.netology.servlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.netology.controller.PostController;
-import ru.netology.repository.PostRepository;
-import ru.netology.service.PostService;
+//import ru.netology.repository.PostRepositoryStubImpl;
+//import ru.netology.service.PostService;
 
 public class MainServlet extends HttpServlet {
     private static final String METHOD_GET = "GET";
@@ -15,9 +16,11 @@ public class MainServlet extends HttpServlet {
 
     @Override
     public void init() {
-        final var repository = new PostRepository();
-        final var service = new PostService(repository);
-        controller = new PostController(service);
+//        final var repository = new PostRepositoryStubImpl();
+//        final var service = new PostService(repository);
+//        controller = new PostController(service);
+        final var context = new AnnotationConfigApplicationContext("ru.netology");
+        controller = context.getBean(PostController.class);
     }
 
     @Override
