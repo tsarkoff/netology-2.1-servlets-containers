@@ -23,43 +23,41 @@
             <version>6.1.0</version>
             <scope>provided</scope>
         </dependency>
-        <!--dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-            <scope>provided</scope>
-        </dependency-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.6</version>
             <scope>compile</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.heroku/webapp-runner -->
+        <dependency>
+            <groupId>com.heroku</groupId>
+            <artifactId>webapp-runner</artifactId>
+            <version>10.1.24.0</version>
+        </dependency>
     </dependencies>
     <build>
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>2.5</version>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.3.0</version>
                     <executions>
                         <execution>
-                            <id>clean-jar-artifacts</id>
-                            <phase>install</phase>
+                            <phase>package</phase>
                             <goals>
-                                <goal>clean</goal>
+                                <goal>copy</goal>
                             </goals>
                             <configuration>
-                                <excludeDefaultDirectories>true</excludeDefaultDirectories>
-                                <filesets>
-                                    <fileset>
-                                        <directory>target</directory>
-                                        <excludes>
-                                            <exclude>*.war</exclude>
-                                            <exclude>dependency/*.war</exclude>
-                                        </excludes>
-                                    </fileset>
-                                </filesets>
+                                <artifactItems>
+                                    <artifactItem>
+                                        <groupId>com.github.heroku</groupId>
+                                        <artifactId>webapp-runner</artifactId>
+                                        <version>10.1.24.0</version>
+                                        <destFileName>webapp-runner.jar</destFileName>
+                                    </artifactItem>
+                                </artifactItems>
                             </configuration>
                         </execution>
                     </executions>
@@ -67,6 +65,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
-
 </project>
