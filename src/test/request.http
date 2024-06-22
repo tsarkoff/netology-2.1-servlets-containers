@@ -1,10 +1,10 @@
-GET http://localhost:8080/api/posts/2
+GET http://localhost:9999/api/posts/2
 
 ###
-GET http://localhost:8080/api/posts
+GET http://localhost:9999/api/posts
 
 ###
-POST http://localhost:8080/api/posts
+POST http://localhost:9999/api/posts
 Content-Type: application/json
 
 {
@@ -13,5 +13,5 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/api/posts/4
+DELETE http://localhost:9999/api/posts/4
 Content-Type: application/json
