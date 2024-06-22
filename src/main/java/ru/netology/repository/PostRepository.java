@@ -8,7 +8,11 @@ import java.util.Optional;
 public interface PostRepository {
     List<Post> all();
 
+    List<Post> reallyAll();
+
     Optional<Post> getById(long id);
+
+    Optional<Post> reallyGetById(long id);
 
     Post save(Post post);
 

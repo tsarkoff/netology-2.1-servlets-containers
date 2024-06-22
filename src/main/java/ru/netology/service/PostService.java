@@ -19,8 +19,16 @@ public class PostService {
         return repository.all();
     }
 
+    public List<Post> reallyAll() {
+        return repository.reallyAll();
+    }
+
     public Post getById(long id) {
         return repository.getById(id).orElseThrow(NotFoundException::new);
+    }
+
+    public Post reallyGetById(long id) {
+        return repository.reallyGetById(id).orElseThrow(NotFoundException::new);
     }
 
     public Post save(Post post) {

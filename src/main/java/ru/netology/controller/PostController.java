@@ -20,9 +20,19 @@ public class PostController {
         return service.all();
     }
 
+    @GetMapping("/all")
+    public List<Post> reallyAll() {
+        return service.reallyAll();
+    }
+
     @GetMapping("/{id}")
     public Post getById(@PathVariable long id) {
         return service.getById(id);
+    }
+
+    @GetMapping("/all/{id}")
+    public Post reallyGetById(@PathVariable long id) {
+        return service.reallyGetById(id);
     }
 
     @PostMapping

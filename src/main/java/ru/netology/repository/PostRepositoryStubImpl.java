@@ -6,11 +6,12 @@ import ru.netology.model.Post;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class PostRepositoryStubImpl implements PostRepository {
     private final List<Post> posts = new ArrayList<>();
-    private int postCount;
+    private long postCount;
 
     public PostRepositoryStubImpl() {
         posts.addAll(List.of(
@@ -23,11 +24,19 @@ public class PostRepositoryStubImpl implements PostRepository {
     }
 
     public List<Post> all() {
+        return posts.stream().filter(p -> !p.isRemoved()).collect(Collectors.toList());
+    }
+
+    public List<Post> reallyAll() {
         return posts;
     }
 
     public synchronized Optional<Post> getById(long id) {
-        return posts.stream().filter(post -> post.getId() == id).findFirst();
+        return posts.stream().filter(post -> post.getId() == id && !post.isRemoved()).findFirst();
+    }
+
+    public Optional<Post> reallyGetById(long id) {
+        return Optional.ofNullable(posts.get((int) id));
     }
 
     public synchronized Post save(Post post) {
@@ -43,8 +52,7 @@ public class PostRepositoryStubImpl implements PostRepository {
     public synchronized void removeById(long id) {
         for (Post p : posts) {
             if (p.getId() == id) {
-                posts.remove(p);
-                postCount = posts.size();
+                p.setRemoved(true);
                 break;
             }
         }
